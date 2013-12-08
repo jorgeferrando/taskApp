@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html ng-app="taskApp">
+<head>
+    <title>Unimicro Task Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="vendors/angular-xeditable/css/xeditable.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body ng-controller="taskController">
+    <div id="wrap">
+        <div class="container">
+            <div class="page-header"><h1>TASK LIST</h1></div>
+            <h3>Available Actions</h3>
+            <dl class="dl-horizontal">
+                <dt>Insert</dt>
+                <dd>Use the form above the table to insert new tasks.</dd>
+                <dt>Update</dt>
+                <dd>You can update description and project fields just clicking on them.</dd>
+                <dt>Complete</dt>
+                <dd>You can complete or reopen a task clicking on the checkbox besides the task.</dd>
+                <dt>Complete All</dt>
+                <dd>You can complete or reopen all tasks in the current page clicking on the checkbox that it is in the head of the table.</dd>
+                <dt>Delete</dt>
+                <dd>You can delete a task doing click on the button at the end of the row.</dd>
+                <dt>Delete completed</dt>
+                <dd>You can delete all completed task doing click on the button at the end of the table.</dd>
+            </dl>
+            <div id="alert">
+                <alert type="alert.type" class="visiblealert" ng-if="visiblealert">{{alert.msg}}</alert>
+            </div>
+            <form name="newtaskform" class="form-inline">
+                <h4>Insert a new task</h4>
+                <span class="help-block">Description and Project must have at least one character.</span>
+                <input placeholder="Insert description..."
+                       type="text"
+                       ng-model="formTaskDescription"
+                       ng-model-instant
+                       required
+                       ng-minlength="1"/>
+                <input placeholder="Insert project name..."
+                       type="text"
+                       ng-model="formProjectName"
+                       ng-model-instant
+                       required
+                       ng-minlength="1"/>
+                <button class="btn btn-primary"
+                        ng-disabled="newtaskform.$invalid"
+                        ng-click="addTask()"><i class="icon-plus"></i> Add Task
+                </button>
+            </form>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <th><input type="checkbox" ng-model="allChecked"/></th>
+                    <th>Task</th>
+                    <th>Project</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </thead>
+                <tr ng-repeat="task in filteredTasks">
+                    <td>
+                        <input type="checkbox" ng-model="task.completed" ng-click="completeTask(task)"/>
+                    </td>
+                    <td>
+                        <span editable-text="task.description"
+                              onbeforesave="updateTaskDescription(task,$data)"
+                              class="completed-{{task.completed}}">{{task.description}}</span>
+                    </td>
+                    <td>
+                        <span editable-text="task.project"
+                              onbeforesave="updateTaskProject(task,$data)"
+                              class="completed-{{task.completed}}">{{task.project}}</span>
+                    </td>
+                    <td>
+                        <span class="completed-{{task.completed}}">{{task.duedate}}</span>
+                    </td>
+                    <td>
+                        <button class="btn" ng-click="deleteTask(task)"><i class="icon-trash"></i>Delete</button>
+                    </td>
+                </tr>
+                <tfoot>
+                    <tr>
+                        <td colspan="2">
+                            <strong>Total Tasks: {{totalTasks}}</strong>
+                        </td>
+                        <td>
+                            <strong>Completed Tasks: {{completedTasks}}</strong>
+                        </td>
+                        <td class="form-inline">
+                            <strong>Tasks per page:</strong>
+                            <select class="span1" ng-model="tasksPerPage" ng-options="currentOption for currentOption in perPageOptions"></select>
+                        </td>
+                        <td>
+                            <button ng-disabled="completedTasks === 0" ng-click="deleteCompletedTasks()" class="btn btn-inverse">Remove completed tasks</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            <pagination
+                    total-items="totalTasks"
+                    page="currentPage"
+                    items-per-page="tasksPerPage">
+            </pagination>
+        </div>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js"></script>
+    <script src="http://code.angularjs.org/1.2.4/angular-animate.min.js"></script>
+    <script src="vendors/ui-bootstrap/ui-bootstrap-0.7.min.js"></script>
+    <script src="vendors/angular-xeditable/js/xeditable.min.js"></script>
+    <script src="app.js"></script>
+    <script src="taskController.js"></script>
+    <script src="taskService.js"></script>
+</body>
+</html>

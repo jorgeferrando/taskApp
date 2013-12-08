@@ -1,0 +1,32 @@
+#alert {
+    height: 50px;
+}
+.completed-true {
+    text-decoration: line-through;
+    color:grey;
+}
+input.ng-invalid.ng-dirty {
+    border: 1px solid #fa787e;
+}
+input.ng-valid.ng-dirty {
+    border: 1px solid #78fa89;
+}
+.visiblealert {
+    -webkit-transition: linear 1s;
+    -moz-transition: linear 1s;
+    -ms-transition: linear 1s;
+    -o-transition: linear 1s;
+    transition: linear 1s;
+}
+.visiblealert.ng-enter {
+    opacity: 0;
+}
+.visiblealert.ng-enter-active {
+    opacity: 1;
+}
+.visiblealert.ng-leave {
+    opacity: 1;
+}
+.visiblealert.ng-leave-active {
+    opacity: 0;
+}
