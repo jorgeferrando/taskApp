@@ -76,5 +76,7 @@ this thing should be done as a directive, but I haven't enough time and experien
 
 It's a good practice to have a dependency management library such as RequireJS. It's a little project and I decide not to use this in this case.
 
+This is also a good app to code it with events to manage refreshing and messages. But this is a part of the framework I haven't been able to test.
+
 Testing - Application doesn't use a test framework because lots of them need to install node.js and npm and I wanted to keep it simple in the way you don't need to install anything to run it.
 But I think that if I had had more time and experience I would use Protactor, the one is recommended by AngularJS team.
