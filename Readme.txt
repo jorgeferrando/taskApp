@@ -46,6 +46,16 @@ taskController.js: this file has the controller that manages communication with 
 taskService.js: this file has the service that manages communication with the REST API.
 vendors: has the third-party libraries
 
+IMPROVEMENTS
+============
+
+I add some improvements to application:
+
+- pagination.
+- form validation.
+- you can check or reopen all tasks in the page.
+- you can remove all completed tasks.
+
 EXPERIENCE
 ==========
 The learning curve is huge if you don't have practice. From my point of view official documentation is short and doesn't explain things in a easy way.
