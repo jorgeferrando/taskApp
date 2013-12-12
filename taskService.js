@@ -1,10 +1,10 @@
 taskApp.factory('taskService',function($http){
 
-        var URL = "http://uniskill.cloudapp.net/taskservice";
+        var URL = "http://domain.com/taskservice";
         var MY_HEADERS = {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "X-Uni-Secret": "7f0b6d4d45c18e2bf3d3c841f5cce9ab"
+            "X-Uni-Secret": "9d0b6d4d45c18e2bf3d3c841f5cce9ab"
         };
 
         var combine = function (obj1,obj2) {
